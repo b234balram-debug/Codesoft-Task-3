@@ -1,0 +1,403 @@
+/* ==================== VARIABLES & RESET ==================== */
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #ff6b6b;
+    --success-color: #26a65b;
+    --dark-bg: #1a1a1a;
+    --light-bg: #f8f9fa;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --border-color: #e0e0e0;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==================== CONTAINER ==================== */
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ==================== CALCULATOR MAIN ==================== */
+.calculator {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calculator-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* ==================== DISPLAY ==================== */
+.display {
+    background: linear-gradient(135deg, var(--dark-bg), #2c2c2c);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: white;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.previous-operand {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    min-height: 30px;
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 100%;
+    text-align: right;
+}
+
+.current-operand {
+    font-size: 40px;
+    font-weight: bold;
+    color: #11ff00;
+    text-shadow: 0 0 10px rgba(17, 255, 0, 0.5);
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 100%;
+    text-align: right;
+}
+
+/* ==================== BUTTONS GRID ==================== */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-height: 60px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Number Buttons */
+.btn-number {
+    background: white;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-number:hover {
+    background: var(--light-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-number:active {
+    transform: translateY(0);
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+/* Operator Buttons */
+.btn-operator {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.btn-operator:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-operator:active {
+    transform: translateY(0);
+}
+
+/* Function Buttons */
+.btn-function {
+    background: #ff9500;
+    color: white;
+    font-size: 16px;
+}
+
+.btn-function:hover {
+    background: #ffb143;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 149, 0, 0.4);
+}
+
+.btn-function:active {
+    transform: translateY(0);
+}
+
+/* Equals Button */
+.btn-equals {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--success-color), #1d7c3a);
+    color: white;
+    font-size: 18px;
+}
+
+.btn-equals:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(38, 166, 91, 0.4);
+}
+
+.btn-equals:active {
+    transform: translateY(0);
+}
+
+/* ==================== HISTORY SECTION ==================== */
+.history {
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.history-title {
+    font-size: 16px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.history-list {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 80px;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.history-empty {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.history-item {
+    padding: 8px 12px;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item:hover {
+    background: var(--light-bg);
+    padding-left: 16px;
+}
+
+.history-delete {
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.history-item:hover .history-delete {
+    opacity: 1;
+}
+
+.btn-small {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-height: auto;
+}
+
+.btn-clear-history {
+    width: 100%;
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-clear-history:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+}
+
+/* ==================== SHORTCUTS INFO ==================== */
+.shortcuts-info {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.shortcuts-info p {
+    margin: 5px 0;
+}
+
+/* ==================== SCROLLBAR STYLING ==================== */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 15px;
+    }
+
+    .calculator-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .display {
+        padding: 15px;
+        min-height: 80px;
+    }
+
+    .previous-operand {
+        font-size: 18px;
+    }
+
+    .current-operand {
+        font-size: 32px;
+    }
+
+    .buttons-grid {
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        padding: 12px;
+        font-size: 16px;
+        min-height: 50px;
+    }
+
+    .history-list {
+        min-height: 60px;
+        max-height: 120px;
+    }
+
+    .shortcuts-info {
+        font-size: 11px;
+        margin-top: 15px;
+    }
+
+    .shortcuts-info p {
+        margin: 3px 0;
+    }
+}
+
+/* ==================== ANIMATION FEEDBACK ==================== */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+.btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ==================== ERROR STATE ==================== */
+.error-display {
+    color: #ff6b6b !important;
+}
+
+.error-display {
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
